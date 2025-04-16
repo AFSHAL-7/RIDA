@@ -1,0 +1,203 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 187 100% 35%; /* Safety teal as primary */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 39 100% 50%; /* Warning amber as accent */
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 100% 38%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 187 100% 35%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 187 15% 97%;
+    --sidebar-foreground: 187 30% 25%;
+    --sidebar-primary: 187 100% 35%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 187 15% 93%;
+    --sidebar-accent-foreground: 187 50% 30%;
+    --sidebar-border: 187 20% 90%;
+    --sidebar-ring: 187 100% 35%;
+  }
+
+  .dark {
+    --background: 222.2 20% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 25% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 25% 12%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 187 70% 42%; /* Safety teal (darker theme) */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 39 90% 50%; /* Warning amber (darker theme) */
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 70% 42%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 187 70% 42%;
+
+    --sidebar-background: 187 30% 10%;
+    --sidebar-foreground: 187 15% 90%;
+    --sidebar-primary: 187 70% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 187 25% 15%;
+    --sidebar-accent-foreground: 187 15% 90%;
+    --sidebar-border: 187 20% 20%;
+    --sidebar-ring: 187 70% 42%;
+  }
+}
+
+/* Global styles for the Road Guardian app */
+@layer components {
+  .stats-card {
+    @apply relative p-6 overflow-hidden bg-card text-card-foreground rounded-lg border shadow-sm transition-all hover:shadow-md;
+  }
+  
+  .stats-value {
+    @apply text-3xl font-bold;
+  }
+  
+  .stats-label {
+    @apply text-sm text-muted-foreground font-medium;
+  }
+  
+  .map-container {
+    @apply w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-lg overflow-hidden border border-border;
+  }
+  
+  .data-grid {
+    @apply w-full border border-border rounded-lg overflow-hidden;
+  }
+
+  /* Animation classes */
+  .page-fade-in {
+    @apply animate-in fade-in duration-500;
+  }
+  
+  .slide-in-from-bottom {
+    @apply animate-in slide-in-from-bottom duration-500;
+  }
+  
+  .slide-in-from-left {
+    @apply animate-in slide-in-from-left duration-500;
+  }
+  
+  .slide-in-from-right {
+    @apply animate-in slide-in-from-right duration-500;
+  }
+  
+  .scale-in {
+    @apply animate-in zoom-in duration-500;
+  }
+  
+  .pulse {
+    @apply animate-pulse;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+  
+  .hover-rotate {
+    @apply transition-transform duration-300 hover:rotate-3;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/25;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Add keyframe animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 1; }
+  70% { transform: scale(1.05); opacity: 0.7; }
+  100% { transform: scale(0.95); opacity: 1; }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 3s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 12s linear infinite;
+}
+
+/* Simple fade-in animation without circular dependency */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
